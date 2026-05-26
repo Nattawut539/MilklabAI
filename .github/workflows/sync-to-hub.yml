@@ -9,12 +9,12 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - uses: huggingface/hub-sync@v0.1.0
         with:
           github_repo_id: ${{ github.repository }}
-          huggingface_repo_id: Nattawut539/Basty
+          huggingface_repo_id: Natttawut/Basty
           hf_token: ${{ secrets.HF_TOKEN }}
