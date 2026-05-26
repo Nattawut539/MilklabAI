@@ -1,4 +1,3 @@
-# sales_logger.py
 import sys
 from datetime import datetime
 
@@ -8,10 +7,8 @@ from sheets_client import get_sheet
 
 
 def main():
-    # โหลดค่าจากไฟล์ .env
     load_dotenv()
 
-    # ตรวจว่าผู้ใช้ส่ง argument มาหรือยัง
     if len(sys.argv) < 2:
         print('กรุณาใส่ข้อมูลยอดขาย เช่น python sales_logger.py "ลาเต้น้ำผึ้ง:5:65"')
         return
@@ -19,27 +16,26 @@ def main():
     raw_data = sys.argv[1]
 
     try:
-        # รูปแบบที่ต้องการ: เมนู:จำนวน:ราคา
         menu, quantity, price = raw_data.split(":")
 
+        menu = menu.strip()
         quantity = int(quantity)
         price = float(price)
         total = quantity * price
 
-        today = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
         sheet = get_sheet()
-
-        # เพิ่มข้อมูลลง Google Sheets
         sheet.append_row([
-            today,
+            created_at,
             menu,
             quantity,
             price,
-            total
+            total,
         ])
 
         print("✓ บันทึกยอดขายสำเร็จ")
+        print(f"วันที่: {created_at}")
         print(f"เมนู: {menu}")
         print(f"จำนวน: {quantity}")
         print(f"ราคา: {price}")
@@ -48,9 +44,8 @@ def main():
     except ValueError:
         print("รูปแบบข้อมูลไม่ถูกต้อง")
         print('ตัวอย่างที่ถูกต้อง: python sales_logger.py "ลาเต้น้ำผึ้ง:5:65"')
-
-    except Exception as e:
-        print("เกิดข้อผิดพลาด:", e)
+    except Exception as error:
+        print("เกิดข้อผิดพลาด:", error)
 
 
 if __name__ == "__main__":
