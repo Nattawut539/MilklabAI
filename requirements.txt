@@ -1,5 +1,4 @@
 python-dotenv==1.2.2
-google-generativeai
 gspread==6.2.1
 google-auth==2.53.0
 requests==2.32.5
