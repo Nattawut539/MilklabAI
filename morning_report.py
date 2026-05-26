@@ -1,6 +1,7 @@
 import os
 from collections import defaultdict
 from datetime import datetime, timedelta
+from zoneinfo import ZoneInfo
 
 import requests
 from dotenv import load_dotenv
@@ -41,7 +42,7 @@ def main():
     sheet = get_sheet()
     rows = sheet.get_all_records()
 
-    yesterday = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+    yesterday = (datetime.now(ZoneInfo("Asia/Bangkok")) - timedelta(days=1)).strftime("%Y-%m-%d")
 
     total_sales = 0
     menu_count = defaultdict(int)

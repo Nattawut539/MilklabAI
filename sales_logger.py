@@ -1,5 +1,6 @@
 import sys
 from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from dotenv import load_dotenv
 
@@ -23,7 +24,7 @@ def main():
         price = float(price)
         total = quantity * price
 
-        created_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        created_at = datetime.now(ZoneInfo("Asia/Bangkok")).strftime("%Y-%m-%d %H:%M:%S")
 
         sheet = get_sheet()
         sheet.append_row([
