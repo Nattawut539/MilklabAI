@@ -1,8 +1,9 @@
 name: Sync to Hugging Face Hub
+
 on:
   push:
     branches: [main]
-  workflow_dispatch: # Allow manual trigger from Actions tab
+  workflow_dispatch:
 
 jobs:
   sync:
@@ -11,9 +12,9 @@ jobs:
       - uses: actions/checkout@v6
         with:
           fetch-depth: 0
-      
+
       - uses: huggingface/hub-sync@v0.1.0
         with:
           github_repo_id: ${{ github.repository }}
-          huggingface_repo_id: Havi720s/havi-smoothies
+          huggingface_repo_id: Nattawut539/Basty
           hf_token: ${{ secrets.HF_TOKEN }}
