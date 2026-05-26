@@ -1,3 +1,14 @@
 # MilklabAI
 
-This session adds an Agent Harness that converts Thai user input into JSON actions, validates inputs with guardrails, and records trace logs for debugging.
+---
+title: MilklabAI
+emoji: 🍓
+colorFrom: purple
+colorTo: pink
+sdk: streamlit
+sdk_version: 1.57.0
+app_file: app.py
+pinned: false
+---
+
+# MilklabAI
