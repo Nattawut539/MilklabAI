@@ -2,8 +2,8 @@ name: Morning Report
 
 on:
   schedule:
-    - cron: "0 1 * * *"   # 01:00 UTC = 08:00 เวลาไทย
-  workflow_dispatch:       # ทำให้กด Run workflow เองได้
+    - cron: "0 1 * * *"
+  workflow_dispatch:
 
 jobs:
   send-report:

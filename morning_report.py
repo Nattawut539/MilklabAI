@@ -1,23 +1,22 @@
-# morning_report.py
 import os
-import requests
-from datetime import datetime, timedelta
 from collections import defaultdict
+from datetime import datetime, timedelta
 
+import requests
 from dotenv import load_dotenv
+
 from sheets_client import get_sheet
 
 
 def send_telegram_message(message: str):
-    """ส่งข้อความไป Telegram"""
     bot_token = os.getenv("TELEGRAM_BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
 
     if not bot_token:
-        raise RuntimeError("ไม่พบ TELEGRAM_BOT_TOKEN ใน .env")
+        raise RuntimeError("ไม่พบ TELEGRAM_BOT_TOKEN")
 
     if not chat_id:
-        raise RuntimeError("ไม่พบ TELEGRAM_CHAT_ID ใน .env")
+        raise RuntimeError("ไม่พบ TELEGRAM_CHAT_ID")
 
     url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
 
@@ -49,14 +48,11 @@ def main():
     found_rows = []
 
     for row in rows:
-        # ชื่อคอลัมน์ต้องตรงกับหัวตารางใน Google Sheet
         date_text = str(row.get("วันที่", ""))
         menu = str(row.get("เมนู", ""))
         quantity = int(row.get("จำนวน", 0) or 0)
         total = float(row.get("ยอดรวม", 0) or 0)
 
-        # sales_logger.py บันทึกวันที่เป็น YYYY-MM-DD HH:MM:SS
-        # เลยใช้ startswith เพื่อเทียบเฉพาะวันที่
         if date_text.startswith(yesterday):
             found_rows.append(row)
             total_sales += total
