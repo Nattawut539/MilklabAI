@@ -218,3 +218,5 @@ __marimo__/
 .streamlit/secrets.toml
 .*.json
 service-account.json
+agent_trace.log
+__pycache__/
